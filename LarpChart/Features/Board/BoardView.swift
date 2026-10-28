@@ -1,10 +1,13 @@
+import SwiftData
 import SwiftUI
 
-/// The board for one field: its map, plus the lock toggle.
+/// The board for one field: loads its map and plan, plus the lock toggle.
 struct BoardView: View {
     @Bindable var field: Field
 
+    @Environment(\.modelContext) private var modelContext
     @State private var image: UIImage?
+    @State private var plan: Plan?
     @State private var loadFailed = false
 
     var body: some View {
@@ -13,14 +16,18 @@ struct BoardView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) { lockButton }
+                ToolbarItem(placement: .topBarLeading) { SettingsButton() }
             }
-            .task(id: field.id) { await loadImage() }
+            .task(id: field.id) {
+                plan = field.defaultPlan(in: modelContext)
+                await loadImage()
+            }
     }
 
     @ViewBuilder
     private var content: some View {
-        if let image {
-            ZoomableMapView(image: image, isLocked: field.isMapLocked)
+        if let image, let plan, let phase = plan.rootPhase {
+            BoardEditor(field: field, plan: plan, phase: phase, image: image)
         } else if loadFailed {
             ContentUnavailableView(
                 "Map Unavailable",

@@ -46,6 +46,7 @@ struct FieldLibraryView: View {
         .navigationTitle("Fields")
         .toolbar {
             ToolbarItem(placement: .primaryAction) { addMenu }
+            ToolbarItem(placement: .topBarLeading) { SettingsButton() }
         }
         .photosPicker(isPresented: $showingPhotos, selection: $photoItem, matching: .images)
         .onChange(of: photoItem) { _, item in

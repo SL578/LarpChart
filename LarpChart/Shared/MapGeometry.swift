@@ -1,4 +1,5 @@
 import CoreGraphics
+import Foundation
 
 /// Converts between normalized map-image coordinates and view space.
 ///
@@ -25,6 +26,19 @@ enum MapGeometry {
             x: imageFrame.minX + point.x * imageFrame.width,
             y: imageFrame.minY + point.y * imageFrame.height
         )
+    }
+
+    /// The unit drawn closest to `point` (a view point), if one is within `radius` view points.
+    /// Hit-testing in view space keeps targets the same size at every zoom level.
+    static func unit(at point: CGPoint, among states: [UnitState], in imageFrame: CGRect, radius: CGFloat) -> UUID? {
+        states
+            .map { state -> (id: UUID, distance: CGFloat) in
+                let center = toView(state.position, in: imageFrame)
+                return (state.unitID, hypot(center.x - point.x, center.y - point.y))
+            }
+            .filter { $0.distance <= radius }
+            .min { $0.distance < $1.distance }?
+            .id
     }
 
     /// Not clamped: a point outside the image maps outside 0–1. Call `clamped()` if needed.

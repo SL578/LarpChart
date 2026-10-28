@@ -37,4 +37,23 @@ enum UnitType: String, Codable, CaseIterable, Identifiable {
             .objective
         }
     }
+
+    /// Prefix for auto labels (R1, R2…). Changing one only affects new units.
+    var shortCode: String {
+        switch self {
+        case .rifleman: "R"
+        case .breacher: "B"
+        case .sniper: "S"
+        case .medic: "M"
+        case .logistics: "L"
+        case .gunTruck: "GT"
+        case .helicopter: "H"
+        case .flag: "F"
+        case .bombSite: "BS"
+        case .spawn: "SP"
+        case .cover: "C"
+        case .door: "D"
+        case .enemyContact: "E"
+        }
+    }
 }

@@ -25,11 +25,12 @@ All positions are stored in **normalized map-image coordinates** (0–1 on each 
 - **Field:** name, map image, optional `GeoTransform` (v1)
 - **Plan:** belongs to a Field; owns a tree of Phases; `rootPhaseID`
 - **Phase:** `parentPhaseID` (nil for the root; branching uses this), name, order, `[UnitState]`, `[Arrow]`, ink data (`PKDrawing` as `Data`)
-- **PlanUnit:** (named to avoid clashing with `Foundation.Unit`) id, type (`UnitType` enum: infantry / mechanized / objective categories), label, optional roster member
+- **PlanUnit:** (named to avoid clashing with `Foundation.Unit`) id, type (`UnitType` enum: infantry / mechanized / objective categories), label, role (`UnitRole`: none / squadLead / fireteamLead; what the unit does, separate from its type; lives on the unit, so it's the same in every phase), optional roster member
 - **UnitState:** unitID + position for one phase
 - **Arrow:** id, optional `unitID`, `[CGPoint]` path (normalized), style (route / attack / zone edge)
 - **Roster:** saved list of named members with default unit types
 - **FireLink:** phaseID, shooterUnitIDs, targetUnitID. Per phase, not copied to new phases; one target per shooter per phase.
+- **Unit:** id, type (`UnitType`: what they are), role (`UnitRole`: none / squadLead / fireteamLead, shown as a badge), label, optional roster member
 
 Rules:
 - Arrows are structured objects linked to units. Animation follows an arrow when a unit has one, otherwise a straight line.
@@ -61,7 +62,13 @@ docs/SPEC.md
 - Finger input must work as well as Apple Pencil (rain, gloves, lost Pencil)
 - Tap targets at least 44pt; prefer large controls in live mode
 - No GPS, network, or Supabase code before its milestone
-
+## UI decisions
+- Phase strip: bottom edge, horizontal, like a video timeline
+- Icon palette: floating panel, left side, collapsible
+- Live mode: Next/Hold as large buttons, bottom-right (thumb reach)
+- Left-hand mode (`@AppStorage("leftHandMode")`, toggled in the toolbar Settings popover (gear, top-left)) mirrors these: palette on the right, live-mode buttons bottom-left
+- Dark theme by default (outdoor glare, low light in killhouses)
+- Navigation: field library is a full-screen home grid; the board is full-screen with a back button. No sidebar on the board.
 ## Commands
 
 - Build: `xcodebuild -scheme LarpChart -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' build`

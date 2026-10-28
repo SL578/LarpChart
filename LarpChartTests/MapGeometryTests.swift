@@ -1,4 +1,5 @@
 import CoreGraphics
+import Foundation
 import Testing
 @testable import LarpChart
 
@@ -50,5 +51,30 @@ struct MapGeometryTests {
         let container = CGRect(x: 0, y: 0, width: 100, height: 100)
         let rect = MapGeometry.aspectFitRect(imageSize: .zero, in: container)
         #expect(rect == CGRect(x: 50, y: 50, width: 0, height: 0))
+    }
+
+    // MARK: - Unit hit-testing
+
+    @Test func unitHitPicksNearestWithinRadius() {
+        let frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
+        let near = UnitState(unitID: UUID(), position: .init(x: 0.5, y: 0.5))
+        let far = UnitState(unitID: UUID(), position: .init(x: 0.52, y: 0.5))
+        let hit = MapGeometry.unit(at: CGPoint(x: 505, y: 500), among: [far, near], in: frame, radius: 28)
+        #expect(hit == near.unitID)
+    }
+
+    @Test func unitHitMissesOutsideRadius() {
+        let frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
+        let state = UnitState(unitID: UUID(), position: .init(x: 0.5, y: 0.5))
+        #expect(MapGeometry.unit(at: CGPoint(x: 530, y: 500), among: [state], in: frame, radius: 28) == nil)
+        #expect(MapGeometry.unit(at: CGPoint(x: 520, y: 500), among: [], in: frame, radius: 28) == nil)
+    }
+
+    @Test func unitHitRadiusIsInViewPointsAtAnyZoom() {
+        // Zoomed 4×: the same 28pt radius covers a quarter of the normalized distance.
+        let frame = CGRect(x: -1500, y: -1500, width: 4000, height: 4000)
+        let state = UnitState(unitID: UUID(), position: .init(x: 0.5, y: 0.5))
+        #expect(MapGeometry.unit(at: CGPoint(x: 520, y: 500), among: [state], in: frame, radius: 28) == state.unitID)
+        #expect(MapGeometry.unit(at: CGPoint(x: 540, y: 500), among: [state], in: frame, radius: 28) == nil)
     }
 }

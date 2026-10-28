@@ -16,7 +16,7 @@ One milestone per Claude Code session: `/clear` → plan → build → test → 
   Import an arena map image from Photos or Files. Field library list (create, rename, delete). Board shows the image with pan and pinch-zoom. Lock toggle: when locked, drawing never moves the map.
   *Done when:* you can import a map, zoom around it, lock it, and it's still there after relaunch.
 
-- [ ] **M3. Units**
+- [x] **M3. Units**
   Icon palette (infantry, mechanized, objectives and terrain) using placeholder SF Symbols or simple shapes. Drag from palette onto the map; move, label, and delete units.
   *Done when:* placing and moving 10 units feels fast with a finger.
 
