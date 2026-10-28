@@ -22,8 +22,6 @@ LarpChart complements ATAK rather than competing with it. ATAK (and CivTAK/iTAK)
 
 The planner is a native iPad app (no web port), because Pencil drawing feels better in a dedicated app. Squadmates follow along in a web viewer, which keeps sharing simple.
 
-&#91;embedded content: LarpChart architecture · iPad app, sync backend, web viewer\]
-
 The iPad sends plans and phase changes to a live sync backend, which pushes them to every squadmate's browser; ATAK export comes later.
 
 ## v1 feature set

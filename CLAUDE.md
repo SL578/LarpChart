@@ -29,6 +29,7 @@ All positions are stored in **normalized map-image coordinates** (0–1 on each 
 - **UnitState:** unitID + position for one phase
 - **Arrow:** id, optional `unitID`, `[CGPoint]` path (normalized), style (route / attack / zone edge)
 - **Roster:** saved list of named members with default unit types
+- **FireLink:** phaseID, shooterUnitIDs, targetUnitID. Per phase, not copied to new phases; one target per shooter per phase.
 
 Rules:
 - Arrows are structured objects linked to units. Animation follows an arrow when a unit has one, otherwise a straight line.

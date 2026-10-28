@@ -36,6 +36,10 @@ One milestone per Claude Code session: `/clear` → plan → build → test → 
   Animate units between phases along their arrow, otherwise in a straight line (interpolation logic unit-tested). Live mode: full-screen board with big **Next phase** and **Hold** buttons; the lead controls the clock.
   *Done when:* stepping through a 3-phase plan in live mode looks smooth.
 
+- [ ] **M7.5. Focus fire**
+  FireLink model + tests, create/remove flow, lines and target ring, fade-in after unit animation. See BACKLOG.md "Focus fire".
+  *Done when:* you can set 3 shooters on one target in under 10 seconds, and it animates correctly across phases.
+
 - [ ] **M8. Rosters + reuse**
   Saved squad rosters; drop a whole roster onto the map at once. Duplicate a plan. Saved fields ready on game day.
   *Done when:* a fresh plan on a saved field with your roster takes under 2 minutes.
