@@ -7,7 +7,6 @@ struct LarpChartApp: App {
         WindowGroup {
             RootView()
         }
-        // Models are registered here starting in M1.
-        .modelContainer(for: [])
+        .modelContainer(for: [Field.self, Plan.self, Phase.self, PlanUnit.self, Roster.self])
     }
 }

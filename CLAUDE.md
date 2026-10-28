@@ -25,7 +25,7 @@ All positions are stored in **normalized map-image coordinates** (0–1 on each 
 - **Field:** name, map image, optional `GeoTransform` (v1)
 - **Plan:** belongs to a Field; owns a tree of Phases; `rootPhaseID`
 - **Phase:** `parentPhaseID` (nil for the root; branching uses this), name, order, `[UnitState]`, `[Arrow]`, ink data (`PKDrawing` as `Data`)
-- **Unit:** id, type (`UnitType` enum: infantry / mechanized / objective categories), label, optional roster member
+- **PlanUnit:** (named to avoid clashing with `Foundation.Unit`) id, type (`UnitType` enum: infantry / mechanized / objective categories), label, optional roster member
 - **UnitState:** unitID + position for one phase
 - **Arrow:** id, optional `unitID`, `[CGPoint]` path (normalized), style (route / attack / zone edge)
 - **Roster:** saved list of named members with default unit types

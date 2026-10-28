@@ -8,7 +8,7 @@ One milestone per Claude Code session: `/clear` → plan → build → test → 
   Xcode project (iPadOS 17+, SwiftUI, SwiftData), folder layout from CLAUDE.md, git init, `docs/SPEC.md` and `docs/BACKLOG.md` added. Empty sidebar + detail layout.
   *Done when:* app builds and launches in the iPad simulator.
 
-- [ ] **M1. Data model**
+- [x] **M1. Data model**
   SwiftData models for Field, Plan, Phase, Unit, UnitState, Arrow, Roster. Phase-tree helpers (children, path to root, add phase copying the previous one). Coordinate helpers (normalized ↔ view space).
   *Done when:* unit tests cover phase-tree helpers and coordinate math, and pass.
 
