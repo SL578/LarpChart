@@ -1,21 +1,21 @@
 import SwiftUI
 
-/// Root navigation: field library in the sidebar, board in the detail column.
+/// Root navigation: the field library is home; a field's board opens full-screen on top.
 struct RootView: View {
+    @State private var path: [Field] = []
+
     var body: some View {
-        NavigationSplitView {
-            List {}
-                .navigationTitle("Fields")
-        } detail: {
-            ContentUnavailableView(
-                "No Field Selected",
-                systemImage: "map",
-                description: Text("Pick a field from the sidebar.")
-            )
+        NavigationStack(path: $path) {
+            FieldLibraryView { field in path.append(field) }
+                .navigationDestination(for: Field.self) { field in
+                    BoardView(field: field)
+                        .id(field.id)
+                }
         }
     }
 }
 
 #Preview {
     RootView()
+        .modelContainer(for: Field.self, inMemory: true)
 }

@@ -3,6 +3,11 @@
 Ideas that came up outside the current milestone. Review when planning the next one.
 
 ## Ideas
+
+- **Replace a field's map image** (keep its plans). Out of M2 scope.
+- **Remember zoom/pan per field** across launches. M2 saves only the lock.
+- **Rotate the map** (two-finger rotate or a 90° button) for maps drawn off-north.
+
 ## Focus fire
 
 **What:** Show which units are concentrating fire on one target during a phase.

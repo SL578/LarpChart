@@ -12,7 +12,7 @@ One milestone per Claude Code session: `/clear` → plan → build → test → 
   SwiftData models for Field, Plan, Phase, Unit, UnitState, Arrow, Roster. Phase-tree helpers (children, path to root, add phase copying the previous one). Coordinate helpers (normalized ↔ view space).
   *Done when:* unit tests cover phase-tree helpers and coordinate math, and pass.
 
-- [ ] **M2. Fields**
+- [x] **M2. Fields**
   Import an arena map image from Photos or Files. Field library list (create, rename, delete). Board shows the image with pan and pinch-zoom. Lock toggle: when locked, drawing never moves the map.
   *Done when:* you can import a map, zoom around it, lock it, and it's still there after relaunch.
 

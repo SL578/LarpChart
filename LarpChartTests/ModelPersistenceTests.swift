@@ -94,6 +94,22 @@ struct ModelPersistenceTests {
         #expect(loaded.members == roster.members)
     }
 
+    @Test func fieldImageNameAndLockReadBack() throws {
+        let field = Field(name: "Field 1", imageData: Data([9, 8, 7]), thumbnailData: Data([1]))
+        #expect(field.isMapLocked == false)
+        context.insert(field)
+        try context.save()
+        field.name = "Killhouse"
+        field.isMapLocked = true
+        try context.save()
+
+        let loaded = try #require(try ModelContext(container).fetch(FetchDescriptor<Field>()).first)
+        #expect(loaded.name == "Killhouse")
+        #expect(loaded.isMapLocked)
+        #expect(loaded.imageData == Data([9, 8, 7]))
+        #expect(loaded.thumbnailData == Data([1]))
+    }
+
     @Test func deletingFieldCascades() throws {
         let (plan, _, _) = makePlan()
         try context.save()
