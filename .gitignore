@@ -1,0 +1,11 @@
+.DS_Store
+
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcuserstate
+
+# Web viewer (v0.5+)
+node_modules/
+web/dist/
